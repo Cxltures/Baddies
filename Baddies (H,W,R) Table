@@ -1,0 +1,16 @@
+--// CONFIGURABLES
+getgenv().hitboxConfig = {
+    enabled = true,
+    size = 7,
+    transparency = 1,
+    collision = false
+}
+
+getgenv().walkSpeedConfig = {
+    enabled = true,
+    speed = 13
+}
+
+getgenv().rejoinConfig = {
+    enabled = true
+}
