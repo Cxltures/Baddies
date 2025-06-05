@@ -1,0 +1,30 @@
+if _G.ClickTeleport == nil then
+    _G.ClickTeleport = true
+
+    local Players = game:GetService("Players")
+    local UserInputService = game:GetService("UserInputService")
+    local player = Players.LocalPlayer
+    local mouse = player:GetMouse()
+
+    local function onInput(input, gameProcessed)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if _G.ClickTeleport and UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
+                local character = player.Character
+                if character and character:FindFirstChild("HumanoidRootPart") then
+                    character:MoveTo(mouse.Hit.Position)
+                end
+            end
+        end
+    end
+
+    -- Listen for input
+    UserInputService.InputBegan:Connect(onInput)
+
+    -- Optional: reconnect input if you want to clean up on respawn
+    player.CharacterAdded:Connect(function(char)
+        -- Wait for character to fully load
+        repeat wait() until char:FindFirstChild("HumanoidRootPart")
+    end)
+else
+    _G.ClickTeleport = not _G.ClickTeleport
+end
